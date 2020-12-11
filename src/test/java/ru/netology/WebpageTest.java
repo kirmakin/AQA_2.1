@@ -38,19 +38,20 @@ public class WebpageTest {
         $(".form-field .button__content").click();
         $x("//span[text()='Мобильный телефон']/following-sibling::span[contains(@class, 'input__sub')]").shouldHave(exactText("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
-@Test
-    public void shouldntSubmitRequestByCheckbox() {
-    open("http://localhost:9999");
-    $("[data-test-id=name] input").setValue("Иван Сидоров");
-    $("[data-test-id=phone] input").setValue("+79270000001");
-    $(".form-field .button__content").click();
-    $(".input_invalid>.checkbox__box");
-}
 
-@Test
-    public void shouldntSubmitByEmptyFields () {
-    open("http://localhost:9999");
-    $(".form-field .button__content").click();
-    $x("//span[text()='Фамилия и имя']/following-sibling::span[contains(@class, 'input__sub')]").shouldHave(exactText("Поле обязательно для заполнения"));
-}
+    @Test
+    public void shouldntSubmitRequestByCheckbox() {
+        open("http://localhost:9999");
+        $("[data-test-id=name] input").setValue("Иван Сидоров");
+        $("[data-test-id=phone] input").setValue("+79270000001");
+        $(".form-field .button__content").click();
+        $(".input_invalid>.checkbox__box");
+    }
+
+    @Test
+    public void shouldntSubmitByEmptyFields() {
+        open("http://localhost:9999");
+        $(".form-field .button__content").click();
+        $x("//span[text()='Фамилия и имя']/following-sibling::span[contains(@class, 'input__sub')]").shouldHave(exactText("Поле обязательно для заполнения"));
+    }
 }
