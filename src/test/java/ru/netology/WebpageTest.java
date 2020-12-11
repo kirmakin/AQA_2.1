@@ -1,6 +1,8 @@
 package ru.netology;
 
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.*;
@@ -24,7 +26,7 @@ public class WebpageTest {
         $("[data-test-id=phone] input").setValue("+79270000001");
         $("[data-test-id=agreement] .checkbox__box").click();
         $(".form-field .button__content").click();
-        $("#root > div > form > div:nth-child(1) > span > span > span.input__sub").shouldHave(exactText("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
+        $x("//span[text()='Фамилия и имя']/following-sibling::span[contains(@class, 'input__sub')]").shouldHave(exactText("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы."));
     }
 
     @Test
@@ -34,7 +36,7 @@ public class WebpageTest {
         $("[data-test-id=phone] input").setValue("+792700000012");
         $("[data-test-id=agreement] .checkbox__box").click();
         $(".form-field .button__content").click();
-        $("#root > div > form > div:nth-child(2) > span > span > span.input__sub").shouldHave(exactText("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
+        $x("//span[text()='Мобильный телефон']/following-sibling::span[contains(@class, 'input__sub')]").shouldHave(exactText("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
 @Test
     public void shouldntSubmitRequestByCheckbox() {
@@ -49,7 +51,6 @@ public class WebpageTest {
     public void shouldntSubmitByEmptyFields () {
     open("http://localhost:9999");
     $(".form-field .button__content").click();
-    $("#root > div > form > div:nth-child(1) > span > span > span.input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
+    $x("//span[text()='Фамилия и имя']/following-sibling::span[contains(@class, 'input__sub')]").shouldHave(exactText("Поле обязательно для заполнения"));
 }
-
 }
